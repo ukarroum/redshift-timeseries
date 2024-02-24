@@ -5,6 +5,10 @@ name = "pypi"
 
 [packages]
 redshift-connector = "*"
+flask = "*"
+psycopg = "*"
+pyqt5 = "*"
+dash = "*"
 
 [dev-packages]
 
