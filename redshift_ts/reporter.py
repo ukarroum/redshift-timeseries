@@ -1,12 +1,19 @@
 import datetime as dt
+import random
+
+import pandas as pd
 
 from redshift_ts.db.redshift import get_con
 
 
 def get_data_rs(
         window: int = 60*2,  # nb of seconds
-        start_time: dt.datetime = None
+        start_time: dt.datetime = None,
+        mock=False
 ):
+    if mock:
+        return pd.DataFrame(data={'ts': [dt.datetime.now() - dt.timedelta(seconds=i) for i in range(50)], 'val': [random.random() for _ in range(50)]})
+
     conn = get_con()
 
     cursor = conn.cursor()

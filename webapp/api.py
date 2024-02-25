@@ -18,7 +18,7 @@ def measures():
     else:
         start_time = dt.datetime.fromisoformat(start_time)
 
-    df = reporter.get_data_rs(start_time=start_time, window=int(flask.request.form.get("window")))
+    df = reporter.get_data_rs(start_time=start_time, window=int(flask.request.form.get("window")), mock=True)
 
     return {"labels": df.ts.to_list(), "data": df.val.to_list()}
 
