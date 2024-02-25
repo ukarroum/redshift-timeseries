@@ -9,6 +9,8 @@ flask = "*"
 psycopg = "*"
 pyqt5 = "*"
 dash = "*"
+gunicorn = "*"
+pandas = "*"
 
 [dev-packages]
 
