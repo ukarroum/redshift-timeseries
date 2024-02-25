@@ -5,7 +5,6 @@ import redshift_connector
 from redshift_ts import config
 
 
-@lru_cache
 def get_con():
     cfg = config.get_config()
     return redshift_connector.connect(
