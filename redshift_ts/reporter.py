@@ -12,7 +12,12 @@ def get_data_rs(
         mock=False
 ):
     if mock:
-        return pd.DataFrame(data={'ts': [dt.datetime.now() - dt.timedelta(seconds=i) for i in range(50)], 'val': [random.random() for _ in range(50)]})
+        if start_time:
+            end_time = start_time + dt.timedelta(seconds=window)
+        else:
+            end_time = dt.datetime.now()
+
+        return pd.DataFrame(data={'ts': [end_time - dt.timedelta(seconds=i) for i in range(window)], 'val': [random.random() for _ in range(window)]})
 
     conn = get_con()
 
@@ -25,7 +30,6 @@ def get_data_rs(
         print(f"select * from ts_data where ts > '{dt.datetime.now() - dt.timedelta(seconds=window)}'")
         cursor.execute(f"select * from ts_data where ts > '{dt.datetime.now() - dt.timedelta(seconds=window)}'")
 
-    # not sure if it's faster to limit in sql or in pandas
     return cursor.fetch_dataframe()
 
 
