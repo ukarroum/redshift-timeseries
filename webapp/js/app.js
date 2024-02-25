@@ -19,9 +19,9 @@ options: {
 }
 });
 
-function update_chart()
+function update_chart(repeat = false)
 {
-    if($("#refresh").is(":checked"))
+    if($("#refresh").is(":checked") || !repeat)
     {
         $.post(
             "http://127.0.0.1:5000/api/measures",
@@ -36,10 +36,12 @@ function update_chart()
         });
     }
 
-    setTimeout(update_chart, parseInt($("#refresh-rate").val()));
+    if(repeat)
+        setTimeout(update_chart, parseInt($("#refresh-rate").val()));
 }
 
-update_chart();
+update_chart(true);
 
-$("#start-time").on('change', update_chart);
-$("#window").on('change', update_chart);
+$("#refresh-now").on('click', function() { update_chart(false); });
+$("#start-time").on('change', function() { update_chart(false); });
+$("#window").on('change', function() { update_chart(false); });
