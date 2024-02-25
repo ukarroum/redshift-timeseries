@@ -41,3 +41,5 @@ function update_chart()
 
 update_chart();
 
+$("#start-time").on('change', update_chart);
+$("#window").on('change', update_chart);
