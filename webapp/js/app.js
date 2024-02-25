@@ -24,7 +24,7 @@ function update_chart(repeat = false)
     if($("#refresh").is(":checked") || !repeat)
     {
         $.post(
-            "http://127.0.0.1:5000/api/measures",
+            "http://" + location.hostname + "/api/measures",
             {
                 starttime: $("#start-time").val(),
                 window: $("#window").val()
