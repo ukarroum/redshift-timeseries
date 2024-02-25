@@ -13,15 +13,12 @@ app = Flask(__name__, template_folder='.')
 @app.route("/api/measures", methods=["POST"])
 def measures():
     start_time = flask.request.form.get("starttime")
-    print(start_time)
     if not start_time:
         start_time = None
     else:
         start_time = dt.datetime.fromisoformat(start_time)
 
     df = reporter.get_data_rs(start_time=start_time, window=int(flask.request.form.get("window")))
-
-    print(df.tail(5))
 
     return {"labels": df.ts.to_list(), "data": df.val.to_list()}
 
